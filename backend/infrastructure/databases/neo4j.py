@@ -1,5 +1,5 @@
 from neo4j import GraphDatabase
-import os
+from config.settings import settings
 
 """
 Class that manages the Neo4j database.
@@ -10,9 +10,9 @@ class Neo4j_Manager:
   """
   def __init__(self):
     # Load Neo4j credentials from environment variables
-    self.NEO4J_URI = os.getenv('NEO_CONNECTION_URL')
-    self.NEO4J_USERNAME = os.getenv('NEO_DB_ID')
-    self.NEO4J_PASSWORD = os.getenv('NEO_PASSWORD')
+    self.NEO4J_URI = settings.NEO_CONNECTION_URL
+    self.NEO4J_USERNAME = settings.NEO_DB_ID
+    self.NEO4J_PASSWORD = settings.NEO_PASSWORD
 
     # Ensure credentials are set
     if not all([self.NEO4J_URI, self.NEO4J_USERNAME, self.NEO4J_PASSWORD]):

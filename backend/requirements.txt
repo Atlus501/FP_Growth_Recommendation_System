@@ -7,3 +7,5 @@ pydantic
 uvicorn
 pami
 pymongo[srv]
+starlette
+slowapi

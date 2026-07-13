@@ -3,11 +3,10 @@ from fastapi import Depends, HTTPException
 from datetime import datetime, timedelta, timezone
 import jwt
 from jwt.exceptions import InvalidTokenError
-import os 
-
 from pwdlib import PasswordHash
 
 from api.schemas.auth import AuthToken, User
+from config.settings import settings
 
 """
 This is the class that will manage the authentication information & jwt of users
@@ -19,8 +18,8 @@ class Auth_Manager:
     def __init__ (self, database : User_Manager):
         self.password_hash = PasswordHash.recommended()
         self.db = database
-        self.hash_function = os.getenv("HASH_ALGORITHM")
-        self.secret_key = os.getenv("SECRET_KEY")
+        self.hash_function = settings.HASH_ALGORITHM
+        self.secret_key = settings.SECRET_KEY
 
 
     """
@@ -133,5 +132,4 @@ class Auth_Manager:
                 headers={"WWW-Authenticate": "Bearer"},
             )
 
-        user_token = self.create_access_token({"sub" : username})
-        return user, user_token
+        return True

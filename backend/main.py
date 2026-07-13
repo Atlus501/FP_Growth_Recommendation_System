@@ -1,10 +1,13 @@
 from fastapi import FastAPI, APIRouter, status
-from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import logging
 import uvicorn
 from dotenv import load_env
 import os
+
+#middlewares
+from middleware.secure_headers import SecureResponseMiddlware
+from middleware.cors import setup_corsmiddleware
 
 #errors
 from pymongo.errors import DuplicateKeyError
@@ -21,15 +24,11 @@ from api.routes.auth import router as auth_router
 from services.auth.authmanager import Auth_Manager
 from infrastructure.databases.neo4j import Neo4j_Manager
 
-allowed_origins = [
-    "http://localhost:8000", # If you also test locally
-]
-
 #creating dependencies 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # [Startup]: Triggered before the server starts accepting requests
-    logging.basicConfig(level=logging.WARNING, filename="job_post_recommendation_system.log", 
+    logging.basicConfig(level=logging.INFO, filename="job_post_recommendation_system.log", 
                                                format='%(asctime)s - %(levelname)s - %(message)s')
     app.state.auth_manager = Auth_Manager()
     app.state.neo4j_manager = Neo4j_Manager()
@@ -47,13 +46,8 @@ app = FastAPI(
 )
 
 #adding cors middlware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins,           # Allowed domains list
-    allow_credentials=True,          # Permit cookies / auth headers
-    allow_methods=["*"],             # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],             # Allow all custom HTTP headers
-)
+setup_corsmiddleware(app)
+app.add_middlware(SecureResponseMiddlware)
 
 app.include_router(auth_router, prefix="/auth")
 

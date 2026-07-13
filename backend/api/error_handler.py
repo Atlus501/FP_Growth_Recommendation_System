@@ -25,7 +25,7 @@ def duplicatekeyerror_handler(request: Request, e: DuplicateKeyError):
 
     return JSONResponse(
         status_code=status.HTTP_409_CONFLICT,
-        "detail" : "You have declared a key that already exists. Try another value"
+        content={"detail" : "You have declared a key that already exists. Try another value"}
     )
 
 """
@@ -36,7 +36,7 @@ def invalidtokenerror_handler(request: Request, e : InvalidTokenError):
 
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
-        "detail" : "You have used an invalid jwt",
+        content={"detail" : "You have used an invalid jwt"}
     )
 
 """
@@ -47,7 +47,7 @@ def validationerror_handler(request: Request, e: ValidationError):
 
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
-        "detail" : "Invalid datatypes were detected in your request"
+        content={"detail" : "Invalid datatypes were detected in your request"}
     )
 
 """
@@ -58,7 +58,7 @@ def runtimeerror_handler(request: Request, e : RuntimeError):
 
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        "detail" : "A rntime error has triggered",
+        content={"detail" : "A rntime error has triggered"}
     )
 
 """
@@ -69,5 +69,5 @@ def exception_handler(request: Request, e : Exception):
 
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        "detail" : "There was an unexpected runtime error"
+        content={"detail" : "There was an unexpected runtime error"}
     )

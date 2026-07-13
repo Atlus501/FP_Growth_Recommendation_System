@@ -1,8 +1,9 @@
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv
-import os
 import logging
+
+from config.settings
 
 """
 Class for managing the MongoDB instance
@@ -13,8 +14,8 @@ class MongoDB_Manager:
     Params: None
     """
     def __init__ (self):
-        db_username = os.getenv("MONGODB_USERNAME")
-        db_password = os.getenv('MONGODB_PASSWORD')
+        db_username = settings.MONGODB_USERNAME
+        db_password = settings.MONGODB_PASSWORD
         uri = f"mongodb+srv://{db_username}:{db_password}@jobrate.67izimm.mongodb.net/?appName=JobRate"
         self.client = MongoClient(uri, server_api=ServerApi('1'))
         self.logger = logging.getLogger(__name__)

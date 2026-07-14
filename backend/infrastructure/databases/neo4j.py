@@ -4,7 +4,7 @@ from config.settings import settings
 """
 Class that manages the Neo4j database.
 """
-class Neo4j_Manager:
+class Neo4j_DB:
   """
   Constructor for the Neo4j manager object
   """

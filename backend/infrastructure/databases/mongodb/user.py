@@ -1,9 +1,9 @@
-from infrastructure.databases.mongodb import MongoDB_Manager
+from infrastructure.databases.mongodb import MongoDB
 
 """
 Class for managing users in a mongodb database
 """
-class User_Manager(MongoDB_Manager):
+class User_DB(MongoDB):
     def __init__ (self):
         super.__init__()
         self.collection = self.get_collection("users")

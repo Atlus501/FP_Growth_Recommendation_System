@@ -8,7 +8,7 @@ from config.settings
 """
 Class for managing the MongoDB instance
 """
-class MongoDB_Manager:
+class MongoDB:
     """
     Constructor for the MongoDB manager.
     Params: None

@@ -1,17 +1,21 @@
 from fastapi import HTTPException
 from pwdlib import PasswordHash
-from api.schemas.auth import AuthToken, User
+
 from config.settings import settings
+
+from schemas.services.auth import User
+
+from infrastructure.databases.mongodb.users import User_DB
 
 """
 This is the class that will manage the authentication information & jwt of users
 """
-class Auth_Manager:
+class Auth_Service:
     """
     Constructor for the Auth_Manager
-    Params: database (User_Manager)
+    Params: database (User_DB)
     """
-    def __init__ (self, database : User_Manager):
+    def __init__ (self, database : User_DB):
         self.password_hash = PasswordHash.recommended()
         self.collection = database.collection
 

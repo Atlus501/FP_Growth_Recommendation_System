@@ -1,9 +1,10 @@
 import logging
 
-from infrastructure.jwt import Jwt_Manager
 from fastapi import APIRouter, Request, status, HTTPException, Depends, BackgroundTasks
 
 from helpers.ratelimiter import limiter
+
+from infrastructure.jwt import Jwt_Manager
 
 router = APIRouter()
 

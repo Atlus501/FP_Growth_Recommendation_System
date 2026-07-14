@@ -10,10 +10,6 @@ class Login(BaseModel):
     username : str
     password : str
 
-class AuthToken(BaseModel):
-    access_token: str
-    token_type: str
-
 class ChangeInfo(BaseModel):
     username : str
     oldpassword : str

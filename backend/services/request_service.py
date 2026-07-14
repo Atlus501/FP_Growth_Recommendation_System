@@ -1,16 +1,17 @@
 import logging
 
-from infrastructure.databases.mongodb.requests import Requests_Manager
-from api.schemas.requests import Request
+from schemas.services.requests import Request
+
+from infrastructure.databases.mongodb.requests import Request_DB
 
 """
 Class for business logic of managing requests
 """
-class Requests_Manager:
+class Request_Service:
     """
     Constructor for managing requests to add job postings
     """
-    def __init__(self, db : Requests_Manager)
+    def __init__(self, db : Request_DB)
         self.client = db.client
         self.collection = db.collection
 

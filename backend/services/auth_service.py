@@ -26,8 +26,7 @@ class Auth_Service:
     async def create_user(self, user : User):
         user_data = user.model_dump()
         user_object['password'] = self.hash_password(user.password)
-        user = await self.auth.insert_one(user_object)
-        return str(user.inserted_id)
+        return await self.auth.insert_one(user_object)
 
     """
     Function that gets users

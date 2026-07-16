@@ -1,9 +1,15 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer
 import jwt
 from jwt.exceptions import InvalidTokenError
 from datetime import datetime, timedelta, timezone
+from typing import Annotated
 
 from config.settings import settings
+
+from schemas.infrastructure.auth import AuthToken
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 """
 Class for managing jwts
